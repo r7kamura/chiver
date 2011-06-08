@@ -1,7 +1,12 @@
 require "date"
 require "rubygems"
-require "bundler/setup"
-Bundler.require
+require "sinatra"
+require "sinatra_more"
+require "i18n"
+require "haml"
+require "sass"
+require "redcarpet"
+require "nokogiri"
 
 class Chiver < Sinatra::Base
   register SinatraMore::MarkupPlugin
