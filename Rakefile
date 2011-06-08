@@ -17,8 +17,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "chiver"
   gem.homepage = "http://github.com/r7kamura/chiver"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{a simple archive system using sinatra and markdown}
+  gem.description = %Q{a simple archive system using sinatra and markdown}
   gem.email = "r7kamura@gmail.com"
   gem.authors = ["Ryo NAKAMURA"]
   # dependencies defined in Gemfile

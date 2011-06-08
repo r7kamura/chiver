@@ -1,6 +1,6 @@
 = chiver
 
-Description goes here.
+a simple archive system using sinatra and markdown
 
 == Contributing to chiver
  
