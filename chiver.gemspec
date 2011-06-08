@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{chiver}
-  s.version = "0.3.0"
+  s.version = "0.3.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Ryo NAKAMURA"]
-  s.date = %q{2011-06-08}
+  s.date = %q{2011-06-09}
   s.description = %q{a simple archive system using sinatra and markdown}
   s.email = %q{r7kamura@gmail.com}
   s.extra_rdoc_files = [
@@ -24,7 +24,6 @@ Gem::Specification.new do |s|
     "README.rdoc",
     "Rakefile",
     "VERSION",
-    "chiver-0.0.2.gem",
     "chiver.gemspec",
     "lib/chiver.rb",
     "test/helper.rb",
