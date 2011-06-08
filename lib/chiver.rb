@@ -21,11 +21,9 @@ class Chiver < Sinatra::Base
     def convert(name)
       filename = File::basename(name) + settings.ext
       text = File.read(File.join(settings.pages, filename))
-      text = Markdown.new(text, :fenced_code, :autolink, :generate_toc, :lax_htmlblock, :tables, :hard_wrap).to_html
-      html = Nokogiri::HTML(text)
-      before = html.css("code").to_s
-      after = before.gsub("\n", "<br>")
-      html.to_s.gsub(before, after)
+      text = Markdown.new(text, :fenced_code, :autolink, :generate_toc, :lax_htmlblock, :tables, :hard_wrap)
+      html = Nokogiri::HTML(text.to_html)
+      html.css("code").inject(html.to_s){|r, c| r.gsub(c.to_s, c.to_s.gsub("\n", "<br>")) }
     end
   end
 
