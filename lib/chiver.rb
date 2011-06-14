@@ -14,7 +14,7 @@ class Chiver < Sinatra::Base
   set :pages, File.join(root, "pages")
   set :haml,  :format => :html5
   set :sass,  :views => "#{root}/public/stylesheets"
-  set :title, "Chiver"
+  set :title, root.split("/").last
   set :ext,   ".md"
 
   helpers do
@@ -38,16 +38,11 @@ class Chiver < Sinatra::Base
     sass params[:name].to_sym
   end
 
-  get "/javascripts/:js.css" do
-    content_type "application/x-javascript", :charset => "utf-8"
-    "#{settings.root}/public/js/#{params[:name]}"
-  end
-
   get "/" do
     @entries = Dir::glob("#{settings.pages}/*#{settings.ext}")\
       .sort{|a, b| b<=>a }\
       .map{|file|
-        y, m, d, name = File::basename(file).split("-")
+        y, m, d, name = File::basename(file).split("-", 4)
         next unless [y, m, d, name].all?
         { :date => Date.new(y.to_i, m.to_i, d.to_i), :name => name.split(".").first }
       }
