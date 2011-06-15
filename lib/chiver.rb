@@ -8,7 +8,7 @@ require "haml"
 require "sass"
 require "redcarpet"
 require "nokogiri"
-require "Hashie"
+require "hashie"
 
 class Chiver < Sinatra::Base
   register SinatraMore::MarkupPlugin
@@ -16,8 +16,6 @@ class Chiver < Sinatra::Base
   set :pages, File.join(root, "pages")
   set :haml,  :format => :html5
   set :sass,  :views => "#{root}/public/stylesheets"
-  set :title, root.split("/").last
-  set :ext,   ".md"
 
   helpers do
     def config
@@ -25,11 +23,12 @@ class Chiver < Sinatra::Base
       Hashie::Mash.new(
         "title" => "Chiver",
         "ext"   => ".md",
+        "date"  => "%b, %d, %Y",
       ).merge(File.exist?(file) ? YAML::load_file(file) : {})
     end
 
     def convert(name)
-      filename = File::basename(name) + settings.ext
+      filename = File::basename(name) + config.ext
       text = File.read(File.join(settings.pages, filename))
       text = Markdown.new(text, :fenced_code, :autolink, :generate_toc, :lax_htmlblock, :tables, :hard_wrap)
       html = Nokogiri::HTML(text.to_html)
@@ -49,12 +48,15 @@ class Chiver < Sinatra::Base
   end
 
   get "/" do
-    @entries = Dir::glob("#{settings.pages}/*#{settings.ext}")\
+    @entries = Dir::glob("#{settings.pages}/*#{config.ext}")\
       .sort{|a, b| b<=>a }\
       .map{|file|
         y, m, d, name = File::basename(file).split("-", 4)
         next unless [y, m, d, name].all?
-        { :date => Date.new(y.to_i, m.to_i, d.to_i), :name => name.split(".").first }
+        Hashie::Mash.new(
+          :date => Date.new(y.to_i, m.to_i, d.to_i),
+          :name => name.split(".").first,
+        )
       }
     haml :index
   end
@@ -64,4 +66,3 @@ class Chiver < Sinatra::Base
     haml :page
   end
 end
-

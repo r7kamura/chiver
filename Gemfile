@@ -7,6 +7,7 @@ gem "haml"
 gem "sass"
 gem "redcarpet"
 gem "nokogiri"
+gem "hashie"
 
 group :development do
   gem "shoulda", ">= 0"
