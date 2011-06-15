@@ -5,6 +5,7 @@ GEM
     awesome_print (0.3.2)
     git (1.2.5)
     haml (3.1.1)
+    hashie (1.0.0)
     i18n (0.5.0)
     jeweler (1.6.2)
       bundler (~> 1.0)
@@ -36,6 +37,7 @@ DEPENDENCIES
   awesome_print
   bundler (~> 1.0.0)
   haml
+  hashie
   i18n
   jeweler (~> 1.6.2)
   nokogiri
