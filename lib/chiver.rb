@@ -23,7 +23,7 @@ class Chiver < Sinatra::Base
       Hashie::Mash.new(
         "title" => "Chiver",
         "ext"   => ".md",
-        "date"  => "%b, %d, %Y",
+        "date"  => "%b, %d, %Y"
       ).merge(File.exist?(file) ? YAML::load_file(file) : {})
     end
 
@@ -55,7 +55,7 @@ class Chiver < Sinatra::Base
         next unless [y, m, d, name].all?
         Hashie::Mash.new(
           :date => Date.new(y.to_i, m.to_i, d.to_i),
-          :name => name.split(".").first,
+          :name => name.split(".").first
         )
       }
     haml :index
