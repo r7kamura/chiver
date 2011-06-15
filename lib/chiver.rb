@@ -1,4 +1,5 @@
 require "date"
+require "yaml"
 require "rubygems"
 require "sinatra/base"
 require "sinatra_more/markup_plugin"
@@ -7,6 +8,7 @@ require "haml"
 require "sass"
 require "redcarpet"
 require "nokogiri"
+require "Hashie"
 
 class Chiver < Sinatra::Base
   register SinatraMore::MarkupPlugin
@@ -18,6 +20,14 @@ class Chiver < Sinatra::Base
   set :ext,   ".md"
 
   helpers do
+    def config
+      file = File.join(settings.root, "config.yml")
+      Hashie::Mash.new(
+        "title" => "Chiver",
+        "ext"   => ".md",
+      ).merge(File.exist?(file) ? YAML::load_file(file) : {})
+    end
+
     def convert(name)
       filename = File::basename(name) + settings.ext
       text = File.read(File.join(settings.pages, filename))
@@ -28,7 +38,7 @@ class Chiver < Sinatra::Base
   end
 
   before do
-    @title = settings.title
+    @title = config.title
   end
 
   error { haml :error } unless development?
@@ -54,3 +64,4 @@ class Chiver < Sinatra::Base
     haml :page
   end
 end
+
