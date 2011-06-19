@@ -37,7 +37,7 @@ class Chiver < Sinatra::Base
   end
 
   before do
-    @title = config.title
+    @sitename = @title = config.title
   end
 
   error { haml :error } unless development?
@@ -62,6 +62,7 @@ class Chiver < Sinatra::Base
   end
 
   get /^.([^\.]+).*$/ do
+    @title = "%s - %s" % [params[:captures][0].split("-", 4).last, @title]
     @text = convert(params[:captures][0])
     haml :page
   end
