@@ -1,0 +1,103 @@
+@import "reset"
+
+$site-width: 820px
+
+@mixin link($color)
+  a:link,
+  a:hover,
+  a:visited
+    color: $color
+@mixin radius($r)
+  border-radius: $r
+  -moz-border-radius: $r
+  -webkit-border-radius: $r
+@mixin shadow_in($a, $b, $c, $color)
+  box-shadow: inset $a $b $c $color
+  -moz-box-shadow: inset $a $b $c $color
+  -webkit-box-shadow: inset $a $b $c $color
+
+@mixin centering
+  width: $site-width
+  margin: 0 auto
+
+body
+  @include link(#4183C4)
+  font-family: "Lucida Grande", "Lucida Sans Unicode", sans-serif
+  line-height: 1.65
+  a
+    text-decoration: none
+
+header
+  padding: 1em
+  font-size: 2em
+  h1
+    @include centering
+
+.ancestors
+  margin-bottom: 20px
+
+#main
+  @include centering
+  .entries
+    padding: 0
+    li
+      list-style: none
+      position: relative
+      border-bottom: solid 1px #eee
+      padding: 0.5em 0
+      &:first-child
+        border-top: solid 1px #eee
+      time
+        position: absolute
+        right: 0
+        text-align: right
+  article.page
+    font-size: .85em
+    h1, h2, h3, h4, h5
+      margin-top: 2em
+      &:first-child
+        margin-top: 0
+    h1
+      font-size: 2.8em
+      font-weight: bold
+    h2
+      font-size: 2.0em
+    h3
+      font-size: 1.4em
+    li
+      list-style: disc
+    li li
+      list-style: circle
+    li li li
+      list-style: disc
+    ul, ol
+      margin: 0
+      padding: 0 0 0 1.2em
+    pre
+      margin: 1em 0
+      padding: 1em
+      background: #F6F6F6 url(/img/bg.png) repeat 0 0
+      font-family: "Monaco", "Andale Mono", monospace
+      white-space: pre-wrap
+      overflow: auto
+      @include radius(3px)
+      @include shadow_in(0, 0, 8px, #999)
+    p
+      margin: 1em 0
+    tbody td
+      padding: 5px 10px 5px 5px
+      border-bottom: 1px solid #ccc
+    thead td
+      padding: 5px 10px 5px 5px
+      border-bottom: 1px dashed black
+      font-weight: bold
+    img
+      margin 5px
+      padding: 5px
+      border: 1px solid #ccc
+
+footer
+  p
+    margin-top: 1em
+    padding: 1em
+    @include centering

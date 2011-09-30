@@ -1,0 +1,4 @@
+%ul.entries
+  - @children.each do |child|
+    %li{:class => child[:is_directory] ? "directory" : "" }
+      = link_to child[:name], child[:path]

@@ -1,0 +1,25 @@
+!!!
+%html
+  %head
+    %title
+      = settings.sitename
+    = stylesheet_link_tag *%w{prettify style}
+    = javascript_include_tag *%w{jquery prettify application}
+  %body
+    #wrapper
+      %header
+        %h1
+          = link_to settings.sitename, "/"
+
+      #main
+        %p.ancestors
+          - @ancestors.each do |ancestor|
+            %span
+              = link_to ancestor[:name], ancestor[:path]
+            - if ancestor != @ancestors.last
+              %span.separator
+                &raquo;
+        = yield
+
+      %footer
+        %p
